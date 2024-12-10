@@ -12,7 +12,7 @@
 
 1. 克隆專案
 ```bash
-git clone [repository_url]
+git clone https://github.com/HugoUno/hr-system.git
 cd hr-system
 ```
 
