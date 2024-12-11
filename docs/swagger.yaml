@@ -1,0 +1,34 @@
+openapi: 3.0.0
+info:
+  title: HR System API
+  version: 1.0.0
+paths:
+  /api/employees:
+    get:
+      summary: 獲取所有員工
+      responses:
+        '200':
+          description: 成功返回員工列表
+    post:
+      summary: 創建新員工
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+  /api/leaves:
+    post:
+      summary: 提交請假申請
+    get:
+      summary: 獲取請假記錄
+
+components:
+  schemas:
+    Employee:
+      type: object
+      properties:
+        name:
+          type: string
+        position:
+          type: string

@@ -1,0 +1,42 @@
+# 編譯文件
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+main
+
+# 測試文件
+*.test
+*.out
+
+# 環境配置
+.env
+.env.*
+!.env.example
+
+# 依賴目錄
+/vendor/
+
+# IDE 配置
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 系統文件
+.DS_Store
+Thumbs.db
+
+# 日誌文件
+*.log
+
+# 臨時文件
+tmp/
+temp/
+
+# 數據庫文件
+*.db
+
+# Redis 數據
+dump.rdb 
