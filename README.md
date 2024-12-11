@@ -1,6 +1,6 @@
 # HR 系統後端服務
 
-這是一個基於 Go 語言開發的人力資源管理系統後端服務，提供員工資訊管理和請假申請等功能。
+這是一個使用 Go 語言開發的人力資源管理系統後端服務，提供員工資料管理和請假申請等功能。
 
 ## 系統需求
 
@@ -10,7 +10,7 @@
 
 ## 快速開始
 
-1. 克隆專案
+1. 下載專案
 ```bash
 git clone https://github.com/HugoUno/hr-system.git
 cd hr-system
@@ -42,15 +42,15 @@ curl http://localhost:8080/api/employees
 ## API 端點
 
 ### 員工管理
-- `GET /api/employees` - 獲取所有員工列表
-- `POST /api/employees` - 創建新員工
-- `GET /api/employees/:id` - 獲取特定員工信息
-- `PUT /api/employees/:id` - 更新員工信息
-- `DELETE /api/employees/:id` - 刪除員工
+- `GET /api/employees` - 取得所有員工列表
+- `POST /api/employees` - 新增員工
+- `GET /api/employees/:id` - 取得特定員工資料
+- `PUT /api/employees/:id` - 更新員工資料
+- `DELETE /api/employees/:id` - 移除員工
 
 ### 請假管理
-- `POST /api/leaves` - 提交請假申請
-- `GET /api/leaves/employee/:employeeId` - 獲取員工的請假記錄
+- `POST /api/leaves` - 送出請假申請
+- `GET /api/leaves/employee/:employeeId` - 取得員工的請假紀錄
 
 ## 開發指南
 
@@ -86,18 +86,18 @@ make run           # 本地運行應用程序
 make test          # 運行單元測試
 make docker-build  # 構建 Docker 映像
 make docker-up     # 啟動所有 Docker 服務
-make docker-down   # 停止所有 Docker 服務
+make docker-down   # ���止所有 Docker 服務
 make seed          # 填充測試數據
 make deploy        # 完整部署流程
 ```
 
 ### 數據庫
-- MySQL 用於持久化存儲
-- Redis 用於緩存
-- 初始化腳本位於 `scripts/init.sql`
+- MySQL 用於資料儲存
+- Redis 用於快取
+- 初始化指令檔位於 `scripts/init.sql`
 
 ### 配置說明
-環境變量（在 .env 文件中配置）：
+環境變數（在 .env 檔案中設定）：
 ```env
 DB_HOST=mysql
 DB_USER=hruser
@@ -122,16 +122,15 @@ go test ./tests/employee_test.go
 ## 常見問題
 
 1. 服務無法啟動
-   - 檢查 Docker 是否正在運行
-   - 確認端口 8080, 3306, 6379 未被佔用
-   - 檢查環境變量配置
+   - 確認連接埠 8080, 3306, 6379 未被使用
+   - 檢查環境變數設定
 
 2. 數據庫連接失敗
-   - 確認 MySQL 服務已啟動
-   - 檢查數據庫連接配置
-   - 確認數據庫用戶權限
+   - 確認 MySQL 服務已啟用
+   - 檢查資料庫連線設定
+   - 確認資料庫使用者權限
 
-## 維護和支持
+## 維護和支援
 
-- 問題報告：請在 GitHub Issues 中提交
-- 代碼貢獻：請提交 Pull Request
+- 問題回報：請在 GitHub Issues 中提出
+- 程式碼貢獻：請提交 Pull Request
