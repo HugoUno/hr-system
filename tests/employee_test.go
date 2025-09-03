@@ -17,10 +17,7 @@ func TestLeaveRequest(t *testing.T) {
 
 func TestEmployeeService_Create(t *testing.T) {
 	// 設置測試數據庫
-	db, err := setupTestDB()
-	if err != nil {
-		t.Fatalf("設置測試數據庫失敗: %v", err)
-	}
+	db := setupTestDB(t)
 
 	service := services.NewEmployeeService()
 	employee := &models.Employee{
@@ -28,7 +25,7 @@ func TestEmployeeService_Create(t *testing.T) {
 		Position: "工程師",
 	}
 
-	err = service.Create(employee)
+	err := service.Create(employee)
 	if err != nil {
 		t.Errorf("創建員工失敗: %v", err)
 	}

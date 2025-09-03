@@ -1,25 +1,32 @@
 package tests
 
 import (
-	"hr-system/internal/models"
+	"testing"
 
-	"gorm.io/driver/mysql"
+	"hr-system/internal/models"
+	"hr-system/pkg/database"
+
+	"github.com/glebarez/sqlite"
 	"gorm.io/gorm"
 )
 
-func setupTestDB() (*gorm.DB, error) {
-	// 使用測試數據庫配置
-	dsn := "hruser:hrpassword@tcp(localhost:3306)/hrdb_test?charset=utf8mb4&parseTime=True&loc=Local"
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+// setupTestDB 初始化測試資料庫並回傳資料庫連線
+func setupTestDB(t *testing.T) *gorm.DB {
+	t.Helper()
+
+	// 使用 SQLite 共享內存資料庫作為測試資料庫，無需額外服務
+	db, err := gorm.Open(sqlite.Open("file::memory:?cache=shared"), &gorm.Config{})
 	if err != nil {
-		return nil, err
+		t.Fatalf("failed to connect to test database: %v", err)
 	}
 
-	// 自動遷移測試數據庫結構
-	err = db.AutoMigrate(&models.Employee{}, &models.LeaveRequest{})
-	if err != nil {
-		return nil, err
+	// 自動遷移測試資料庫結構
+	if err := db.AutoMigrate(&models.Employee{}, &models.LeaveRequest{}); err != nil {
+		t.Fatalf("failed to migrate test database: %v", err)
 	}
 
-	return db, nil
+	// 將測試資料庫指派給全域變數，讓服務層能使用
+	database.DB = db
+
+	return db
 }
